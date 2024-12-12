@@ -1,26 +1,49 @@
 import java.util.Scanner;
 
 public class StudiKasus2 {
-    static String []namaPelanggan;
-    static int []meja;
-    static int index;
+    static String[] namaPelanggan = new String[100];
+    static int[] meja = new int[100];
+    static double[] totalPesanan = new double[100];
+    static String[] namaMenu = {"Kopi Hitam", "Latte", "Teh Tarik", "Mie Goreng"};
+    static double[] hargaMenu = {15000, 22000, 12000, 18000};
+    static double[] totalPesananItem = new double[100];
+    static int indexPelanggan = 0;
 
     static void inputMenu() {
-
         Scanner kel4 = new Scanner(System.in);
-        
-        System.out.println("Masukkan Nama Pelanggan: ");
-        namaPelanggan[index] = kel4.nextLine();
-        System.out.println("Masukkan Nomor Meja: ");
-        meja[index] = kel4.nextInt();
+        System.out.print("Masukkan Nama Pelanggan: ");
+        namaPelanggan[indexPelanggan] = kel4.nextLine();
+        System.out.print("Masukkan Nomor Meja: ");
+        meja[indexPelanggan] = kel4.nextInt();
 
+        int pilihMenu;
+        int jumlahItem;
         System.out.println("===== MENU RESTO KAFE =====");
         System.out.println("1. Kopi Hitam - Rp 15,000");
         System.out.println("2. Latte      - Rp 22,000");
         System.out.println("3. Teh Tarik  - Rp 12,000");
         System.out.println("4. Mie Goreng - Rp 18,000");
+        while (true) {
+            
+            System.out.print("Pilih menu (masukkan nomor menu, atau 0 untuk selesai): ");
+            pilihMenu = kel4.nextInt();
+            if(pilihMenu == 0){
+                break;
+            } else if (pilihMenu < 1 || pilihMenu > 4) {
+                System.out.println("Menu tidak valid. Silakan masukkan lagi");
+                continue;
+            }
 
-        for
+            System.out.print("Masukkan jumlah item untuk " + (namaMenu[pilihMenu -1] + " : "));
+            jumlahItem = kel4.nextInt();
+            totalPesananItem[indexPelanggan] = (hargaMenu[pilihMenu - 1]) * jumlahItem;
+            totalPesanan[indexPelanggan] += totalPesananItem[indexPelanggan];
+        }
+        System.out.println("Pesanan berhasil di tambahkan");
+        System.out.println("Total harga pesanan: Rp " + totalPesanan[indexPelanggan]);
+
+        indexPelanggan++;
+        
     }
 
     public static void main(String[] args) {
@@ -28,21 +51,23 @@ public class StudiKasus2 {
         Scanner kel4 = new Scanner(System.in);
         int menu;
 
-        System.out.println("===== Menu Utama =====");
-        System.out.println("1. Tambahkan Pesanan");
-        System.out.println("2. Tampilkan Daftar Pesanan");
-        System.out.println("3. Keluar");
-        System.out.print("Pilih Menu: ");
-        menu = kel14.nextInt();        
-
-        if (menu == 1){
-            tambahPesanan();
-        } else if (menu == 2){
-            tampilPesanan();
-        } else if (menu == 3){
-            break;
-        } else {
-            System.out.println("Pilihan tidak valid, masukkan lagi");
-        }
+        do{
+            System.out.println("===== Menu Utama =====");
+            System.out.println("1. Tambahkan Pesanan");
+            System.out.println("2. Tampilkan Daftar Pesanan");
+            System.out.println("3. Keluar");
+            System.out.print("Pilih Menu: ");
+            menu = kel4.nextInt();        
+    
+            if (menu == 1){
+                inputMenu();
+            } else if (menu == 2){
+                // tampilPesanan();
+            } else if (menu == 3){
+                break;
+            } else {
+                System.out.println("Pilihan tidak valid, masukkan lagi");
+            }
+        } while(true);
     }
 }

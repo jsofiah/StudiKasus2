@@ -38,14 +38,20 @@ public class StudiKasus2 {
                 continue;
             }
 
-            System.out.print("Masukkan jumlah item untuk " + (namaMenu[pilihMenu -1] + " : "));
-            jumlahItem = kel4.nextInt();
+            while (true) {
+                System.out.print("Masukkan jumlah item untuk " + namaMenu[pilihMenu - 1] + " : ");
+                jumlahItem = kel4.nextInt();
+                if (jumlahItem > 0) {
+                    break;
+                } else {
+                    System.out.println("Jumlah item harus lebih dari 0. Silakan masukkan lagi.");
+                }
+            }
 
             double totalHargaItem = hargaMenu[pilihMenu - 1] * jumlahItem;
             totalPesananItem[indexPelanggan] = totalHargaItem;
             totalPesanan[indexPelanggan] += totalHargaItem;
 
-            // Simpan detail pesanan
             detailPesanan[indexPelanggan][indexItem] = namaMenu[pilihMenu - 1] + " x " + jumlahItem + " = Rp " + (int) totalHargaItem;
             indexItem++;
         }
@@ -91,7 +97,7 @@ public class StudiKasus2 {
             if (menu == 1){
                 inputMenu();
             } else if (menu == 2){
-                // tampilPesanan();
+                tampilPesanan();
             } else if (menu == 3){
                 break;
             } else {
